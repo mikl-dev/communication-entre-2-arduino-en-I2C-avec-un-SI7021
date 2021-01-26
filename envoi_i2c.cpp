@@ -58,16 +58,14 @@ void Envoi()
   */
 
   Wire.beginTransmission(1);   // debute une liaison avec l'esclave
-  
-  Wire.write( ((char*)&temp)[0] );    // Envoie du premier octet
-  Wire.write( ((char*)&temp)[1] );    // Envoie du second octet
-  Wire.write( ((char*)&temp)[2] );    // Envoie du troisieme octet
-  Wire.write( ((char*)&temp)[3] );    // Envoie du quatrieme octet
-  
-  Wire.write( ((char*)&humidity)[0] );    // Envoie du premier octet
-  Wire.write( ((char*)&humidity)[1] );    // Envoie du second octet
-  Wire.write( ((char*)&humidity)[2] );    // Envoie du troisieme octet
-  Wire.write( ((char*)&humidity)[3] );    // Envoie du quatrieme octet
-
+  for (int i = 0; i<4 ; i++)
+  {
+    Wire.write( ((char*)&temp)[i] );    // envoi de 4 octets composants le float temperature
+  }
+  for (int i = 0; i<4 ; i++)
+  {
+    Wire.write( ((char*)&humidity)[i] );    // envoi de 4 octets composants le float humidité
+  }
+ 
   Wire.endTransmission();   // libere le canal I2C
 }
