@@ -20,16 +20,15 @@ void loop()
 
 void receiveEvent(int howMany)
 {
-  ((char*)&temprecu)[0] = Wire.read();    // Réception du premier octet
-  ((char*)&temprecu)[1] = Wire.read();    // Réception du second octet
-  ((char*)&temprecu)[2] = Wire.read();    // Réception du troisieme octet
-  ((char*)&temprecu)[3] = Wire.read();    // Réception du quaatrieme octet
-
-  ((char*)&humidity)[0] = Wire.read();    // Réception du premier octet
-  ((char*)&humidity)[1] = Wire.read();    // Réception du second octet
-  ((char*)&humidity)[2] = Wire.read();    // Réception du troisieme octet
-  ((char*)&humidity)[3] = Wire.read();    // Réception du quaatrieme octet
-
+  for (int i = 0; i<4; i++)
+  {
+    ((char*)&temprecu)[i] = Wire.read();  // boucle pour recevoir les 4 octets represantant la temperature
+  }
+  for (int i = 0; i<4; i++)
+  {
+    ((char*)&humidity)[i] = Wire.read(); // boucle pour recevoir les 4 octets represantant l'humidité
+  }
+  
   Serial.print("Temperature recue: ");Serial.println(temprecu);  // affiche la variable reçue
   Serial.print("Humidite recue: ");Serial.println(humidity);
 }
